@@ -28,8 +28,7 @@ public class Execution {
 
     public static void runKotlinScript() throws IOException {
         ProcessBuilder builder = new ProcessBuilder();
-        builder.command("kotlinc", "-script", "foo.kts");
-
+        builder.command("cmd", "/c", "kotlinc", "-script", "foo.kts");
 
         builder.redirectErrorStream(true);
         Process process = builder.start();
