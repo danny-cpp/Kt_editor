@@ -1,5 +1,7 @@
 package ca.ualberta.execution;
 
+import javafx.scene.control.TextArea;
+
 import java.io.*;
 
 public class Execution {
@@ -26,7 +28,7 @@ public class Execution {
     }
 
 
-    public static void runKotlinScript() throws IOException {
+    public static BufferedReader runKotlinScript() throws IOException {
         ProcessBuilder builder = new ProcessBuilder();
         builder.command("cmd", "/c", "kotlinc", "-script", "foo.kts");
 
@@ -35,10 +37,15 @@ public class Execution {
         InputStream is = process.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
+        return reader;
     }
 
+    public static void terminalResponse(BufferedReader reader, TextArea target) throws IOException {
+        String line = null;
+            while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+
+
+        }
+    }
 }

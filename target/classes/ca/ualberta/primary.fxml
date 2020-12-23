@@ -8,18 +8,30 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" prefHeight="1172.0" prefWidth="1399.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="ca.ualberta.PrimaryController">
+<GridPane alignment="CENTER" prefHeight="1172.0" prefWidth="1399.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ualberta.PrimaryController">
    <children>
       <Label GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <HBox prefHeight="941.0" prefWidth="1321.0" GridPane.columnIndex="2">
          <children>
-            <TextArea fx:id="editorInput" prefHeight="941.0" prefWidth="641.0" text="println(&quot;Hello&quot;);" />
-            <TextArea prefHeight="941.0" prefWidth="693.0" text="Hello" />
+            <TextArea fx:id="editorInput" prefHeight="941.0" text="fun main(args:Array&lt;String&gt;) {&#10;        println(&quot;helloWord!&quot;)&#10;}">
+               <font>
+                  <Font size="20.0" />
+               </font></TextArea>
+            <TextArea fx:id="previewArea" maxWidth="-Infinity" prefHeight="941.0" prefWidth="850.0" text="Hello">
+               <font>
+                  <Font size="24.0" />
+               </font></TextArea>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" onMouseClicked="#onClickEvent" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onMouseClicked="#onClickEvent" text="Execute" GridPane.columnIndex="2" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <font>
+            <Font size="24.0" />
+         </font></Button>
 
    </children>
    <padding>
