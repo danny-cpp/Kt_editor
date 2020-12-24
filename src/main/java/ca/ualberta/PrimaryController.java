@@ -1,6 +1,7 @@
 package ca.ualberta;
 
 import ca.ualberta.execution.Execution;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -18,7 +19,7 @@ public class PrimaryController {
     private TextArea editorInput;
 
     @FXML
-    private static TextArea previewArea;
+    private TextArea previewArea;
 
     @FXML
     public void onClickEvent(MouseEvent mouseEvent) {
@@ -33,6 +34,7 @@ public class PrimaryController {
             BufferedReader reader = Execution.runKotlinScript();
 
             Execution.terminalResponse(reader, previewArea);
+            // previewArea.appendText("HI");
         }
         catch (IOException e) {
             e.printStackTrace();

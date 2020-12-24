@@ -15,13 +15,13 @@
       <Label GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <HBox prefHeight="941.0" prefWidth="1321.0" GridPane.columnIndex="2">
          <children>
-            <TextArea fx:id="editorInput" prefHeight="941.0" text="fun main(args:Array&lt;String&gt;) {&#10;        println(&quot;helloWord!&quot;)&#10;}">
+            <TextArea fx:id="editorInput" prefHeight="941.0" text="println(&quot;helloWord!&quot;)&#10;">
                <font>
-                  <Font size="20.0" />
+                  <Font size="22.0" />
                </font></TextArea>
-            <TextArea fx:id="previewArea" maxWidth="-Infinity" prefHeight="941.0" prefWidth="850.0" text="Hello">
+            <TextArea fx:id="previewArea" prefHeight="941.0" prefWidth="850.0" text="helloWord!" editable="false">
                <font>
-                  <Font size="24.0" />
+                  <Font size="22.0" />
                </font></TextArea>
          </children>
       </HBox>

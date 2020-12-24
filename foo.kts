@@ -1,3 +1,1 @@
-fun main(args:Array<String>) {
-        println("helloWord!")
-}
+println("sth!")

@@ -42,10 +42,17 @@ public class Execution {
 
     public static void terminalResponse(BufferedReader reader, TextArea target) throws IOException {
         String line = null;
-            while ((line = reader.readLine()) != null) {
+        target.clear();
+
+        for (int i = 0; i < 6; i++) {
+            reader.readLine();
+        }
+
+        while ((line = reader.readLine()) != null) {
             System.out.println(line);
 
 
+            target.appendText(line + "\n");
         }
     }
 }
