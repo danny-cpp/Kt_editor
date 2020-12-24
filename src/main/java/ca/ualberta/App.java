@@ -18,6 +18,8 @@ import java.io.IOException;
  */
 public class App extends Application {
 
+    private static VBox layout;
+
     private static Scene scene;
 
 
@@ -25,15 +27,13 @@ public class App extends Application {
     @Override
     public void init() throws Exception {
 
-        // scene = new Scene(loadFXML("primary"), 1390, 1190);
-        scene = new Scene(MainScene.createMainScene());
-
-
     }
 
     @Override
     public void start(Stage stage) throws IOException {
 
+        layout = MainScene.createMainScene();
+        scene = new Scene(layout);
         stage.setTitle("Kotlin Editor");
 
         stage.setScene(scene);
