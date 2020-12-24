@@ -8,12 +8,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class PrimaryController {
+
 
     @FXML
     private TextArea editorInput;

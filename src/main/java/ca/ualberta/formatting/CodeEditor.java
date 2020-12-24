@@ -1,5 +1,6 @@
 package ca.ualberta.formatting;
 
+import javafx.beans.NamedArg;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 
@@ -69,7 +70,7 @@ public class CodeEditor extends StackPane {
      * Create a new code editor.
      * @param editingCode the initial code to be edited in the code editor.
      */
-    CodeEditor(String editingCode) {
+    public CodeEditor(String editingCode) {
         this.editingCode = editingCode;
 
         webview.setPrefSize(650, 325);
