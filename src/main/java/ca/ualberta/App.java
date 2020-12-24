@@ -19,7 +19,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 1000, 1100);
+        stage.setTitle("Kotlin Editor");
+
+        scene = new Scene(loadFXML("primary"), 1390, 1190);
+        // scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         stage.setScene(scene);
         stage.show();
     }

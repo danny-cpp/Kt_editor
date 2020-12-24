@@ -1,0 +1,31 @@
+.root {
+    -fx-background-color: #303045;
+}
+
+.word-box {
+    -fx-background-color: transparent;
+    -fx-border-radius: 50;
+    -fx-border-color: #f0f0f0;
+    -fx-border-width: 5;
+    -fx-text-fill: #f0f0f0;
+}
+
+.title {
+
+}
+
+.word-box .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.word-box .scroll-pane .content {
+    -fx-background-color: transparent;
+
+}
+
+.run-button {
+    -fx-border-width: 5;
+    -fx-border-color: #f0f0f0;
+    -fx-border-radius: 50;
+    -fx-background-color: transparent;
+}

@@ -7,31 +7,55 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" prefHeight="1172.0" prefWidth="1399.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ualberta.PrimaryController">
+<GridPane alignment="CENTER" prefHeight="1172.0" prefWidth="1336.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ualberta.PrimaryController">
    <children>
-      <Label GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <HBox prefHeight="941.0" prefWidth="1321.0" GridPane.columnIndex="2">
+
+      <Label GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <HBox prefHeight="941.0" prefWidth="1321.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
-            <TextArea fx:id="editorInput" prefHeight="941.0" text="println(&quot;helloWord!&quot;)&#10;">
+            <TextArea fx:id="editorInput" minWidth="600.0" prefHeight="941.0" prefWidth="850.0" styleClass="word-box" text="println(&quot;helloWord!&quot;)&#10;">
                <font>
                   <Font size="22.0" />
-               </font></TextArea>
-            <TextArea fx:id="previewArea" prefHeight="941.0" prefWidth="850.0" text="helloWord!" editable="false">
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="15.0" top="10.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin></TextArea>
+            <TextArea fx:id="previewArea" editable="false" minWidth="600.0" prefHeight="941.0" prefWidth="850.0" styleClass="word-box" text="helloWord!">
                <font>
                   <Font size="22.0" />
-               </font></TextArea>
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin></TextArea>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" onMouseClicked="#onClickEvent" text="Execute" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Button styleClass="run-button" mnemonicParsing="false" onMouseClicked="#onClickEvent" text="   Execute   " textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="6">
          <GridPane.margin>
-            <Insets />
+            <Insets bottom="20.0" left="20.0" top="25.0" />
          </GridPane.margin>
          <font>
             <Font size="24.0" />
          </font></Button>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+         <children>
+            <Text fill="#f0f0f0" styleClass="title" layoutX="452.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kotlin Editor">
+               <font>
+                  <Font size="72.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
 
    </children>
    <padding>
@@ -43,6 +67,7 @@
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
+      <RowConstraints />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />

@@ -28,13 +28,12 @@ public class PrimaryController {
         // Write to file
         Execution.writeToFile(editorInput.getText());
 
-        //
         try {
 
             BufferedReader reader = Execution.runKotlinScript();
 
             Execution.terminalResponse(reader, previewArea);
-            // previewArea.appendText("HI");
+
         }
         catch (IOException e) {
             e.printStackTrace();
