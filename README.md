@@ -10,6 +10,7 @@
 
 <h4>2. Requirements</h4>
 <ul>
+    <li>Java Development Kit (JDK) 11.0 or higher</li>
     <li>Java Runtime Environment (JRE) 11.0 or higher</li>
     <li>Kotlin compiler <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.21">here</a> </li>
     <li>Maven 3.0 or higher</li>
@@ -42,5 +43,6 @@
 <h4>5. Acknowledgement</h4>
 <p>
     Project implemented the open-source product of <a href="https://github.com/codemirror/codemirror">CodeMirror</a>,
-    which <a href="https://github.com/codemirror/CodeMirror/blob/master/LICENSE">licensed</a> under the MIT license. All rights reserved to the respective owners.
+    which <a href="https://github.com/codemirror/CodeMirror/blob/master/LICENSE">licensed</a> under the MIT license. All rights reserved to the respective owners.<br><br>
+    Project is based on JavaFX 15 framework. All right reserved to the respective owners.
 </p>
