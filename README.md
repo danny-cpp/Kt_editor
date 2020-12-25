@@ -31,3 +31,10 @@
 
 <h4>4. Interface</h4>
     <img src="doc/intro.png" width=900vw>
+<ul>
+    <li>Left-pane is editor</li>
+    <li>Right-pane is terminal output</li>
+    <li>If it is running on Windows, please check the option</li>
+    <li>Check ignore warnings to suppress 
+    <a href="https://stackoverflow.com/questions/56472732/kotlin-compiles-fine-but-keeps-warning-an-illegal-reflective-access-operation">Kotlin Reflection warnings</a></li>
+</ul>
