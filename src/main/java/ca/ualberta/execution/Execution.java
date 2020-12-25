@@ -45,12 +45,14 @@ public class Execution {
         return reader;
     }
 
-    public static void terminalResponse(BufferedReader reader, TextArea target) throws IOException {
+    public static void terminalResponse(BufferedReader reader, TextArea target, boolean noWarning) throws IOException {
         String line = null;
         target.clear();
 
-        for (int i = 0; i < 6; i++) {
-            reader.readLine();
+        if (noWarning) {
+            for (int i = 0; i < 6; i++) {
+                reader.readLine();
+            }
         }
 
         while ((line = reader.readLine()) != null) {
