@@ -20,6 +20,12 @@
     -fx-border-radius: 0;
 }
 
+#previewer {
+    -fx-background-color: #282a36;
+    -fx-background-insets: 20;
+    -fx-background-radius: 60;
+}
+
 #titleArea {
     -fx-font-size: 72;
     -fx-alignment: center;
@@ -50,4 +56,8 @@
     -fx-background-color: transparent;
     -fx-text-fill: #f0f0f0;
     -fx-font-size: 24;
+}
+
+.run-button:hover {
+    -fx-background-color: red;
 }

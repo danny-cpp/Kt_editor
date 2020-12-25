@@ -12,7 +12,7 @@ public class Execution {
      */
     public static void writeToFile(String content) {
         try {
-            FileWriter myWriter = new FileWriter("foo.kts");
+            FileWriter myWriter = new FileWriter("temp/foo.kts");
 
             System.out.println(content);
 
@@ -28,9 +28,14 @@ public class Execution {
     }
 
 
-    public static BufferedReader runKotlinScript() throws IOException {
+    public static BufferedReader runKotlinScript(boolean onWindows) throws IOException {
         ProcessBuilder builder = new ProcessBuilder();
-        builder.command("cmd", "/c", "kotlinc", "-script", "foo.kts");
+        if (onWindows)
+            builder.command("cmd", "/c", "kotlinc", "-script", "foo.kts");
+        else
+            builder.command("kotlinc", "-script", "foo.kts");
+
+        builder.directory(new File("temp/"));
 
         builder.redirectErrorStream(true);
         Process process = builder.start();

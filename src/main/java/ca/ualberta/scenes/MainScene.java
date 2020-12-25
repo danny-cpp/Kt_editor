@@ -35,6 +35,8 @@ public class MainScene {
                                         "  tmp += \"   \"\n" +
                                         "}";
 
+    private static boolean isWindow;
+
     public static VBox createMainScene() {
 
         Label title = new Label("Kotlin Editor");
@@ -52,12 +54,13 @@ public class MainScene {
         previewer.setId("previewer");
         previewer.setEditable(false);
         previewer.getStyleClass().add("word-box");
-        previewer.setPadding(new Insets(10, 0, 0, 35));
+        previewer.setPadding(new Insets(10, 30, 0, 18));
 
         HBox wordBox = new HBox(editor, previewer);
 
+        isWindow = true;
 
-        RadioButton win_check = new RadioButton("   Running on Window");
+        RadioButton win_check = new RadioButton("   Running on Windows");
         win_check.setSelected(true);
         win_check.setId("win_check");
         win_check.getStyleClass().add("checkers");
@@ -70,6 +73,16 @@ public class MainScene {
         HBox.setMargin(ignore_warning, new Insets(5, 50, 0, 60));
 
 
+        win_check.setOnAction(x -> {
+            if (win_check.isSelected()) {
+                isWindow = true;
+            }
+            else {
+                isWindow = false;
+
+            }
+        });
+
         HBox checkers = new HBox(win_check, ignore_warning);
 
         runButton = new Button("Execute");
@@ -79,16 +92,18 @@ public class MainScene {
 
         runButton.setOnAction(x -> {
             content = editor.getCodeAndSnapshot();
-            System.out.println(content);
+            // System.out.println(content);
             System.out.println("good");
 
             // Write to file
             Execution.writeToFile(content);
             try {
-                BufferedReader reader = Execution.runKotlinScript();
+                BufferedReader reader = Execution.runKotlinScript(isWindow);
                 Execution.terminalResponse(reader, previewer);
             }
             catch (IOException e) {
+                previewer.clear();
+                previewer.setText("ERROR OCCUR! \nPlease set \"Running on Windows\" option appropriately.");
                 e.printStackTrace();
             }
         });

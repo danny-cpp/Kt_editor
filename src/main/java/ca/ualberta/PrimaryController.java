@@ -23,24 +23,24 @@ public class PrimaryController {
     @FXML
     private TextArea previewArea;
 
-    @FXML
-    public void onClickEvent(MouseEvent mouseEvent) {
-        System.out.println("good");
-
-        // Write to file
-        Execution.writeToFile(editorInput.getText());
-
-        try {
-
-            BufferedReader reader = Execution.runKotlinScript();
-
-            Execution.terminalResponse(reader, previewArea);
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // @FXML
+    // public void onClickEvent(MouseEvent mouseEvent) {
+    //     System.out.println("good");
+    //
+    //     // Write to file
+    //     Execution.writeToFile(editorInput.getText());
+    //
+    //     try {
+    //
+    //         BufferedReader reader = Execution.runKotlinScript();
+    //
+    //         Execution.terminalResponse(reader, previewArea);
+    //
+    //     }
+    //     catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
 
 }
