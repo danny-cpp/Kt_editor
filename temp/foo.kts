@@ -1,5 +1,5 @@
 // Try me
-val str = "HELLOWORLD!"
+val str = "abc!"
 
 var tmp = ""
 for (i in 0..str.length - 1) {
