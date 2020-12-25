@@ -1,6 +1,7 @@
 <h1 align="center">Kotlin IDE</h1>
 <h4 align="center">By Danh Nguyen</h4>
-___
+
+<br>
 <h4>1. Introduction</h4>
 <p>
     GUI software intended to provide runtime environment
@@ -29,3 +30,4 @@ ___
 </p>
 
 <h4>4. Interface</h4>
+    <img src="doc/intro.png" width=900vw>
