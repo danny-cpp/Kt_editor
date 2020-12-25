@@ -11,10 +11,14 @@ import javafx.scene.web.WebView;
  * See http://codemirror.net for more information on using the codemirror editor.
  */
 public class CodeEditor extends StackPane {
-    /** a webview used to encapsulate the CodeMirror JavaScript. */
+    /**
+     * a webview used to encapsulate the CodeMirror JavaScript.
+     */
     final WebView webview = new WebView();
 
-    /** a snapshot of the code to be edited kept for easy initilization and reversion of editable code. */
+    /**
+     * a snapshot of the code to be edited kept for easy initilization and reversion of editable code.
+     */
     private String editingCode;
 
     /**
@@ -28,7 +32,18 @@ public class CodeEditor extends StackPane {
                     "<head>" +
                     "  <link rel=\"stylesheet\" href=\"http://codemirror.net/lib/codemirror.css\">" +
                     "  <script src=\"http://codemirror.net/lib/codemirror.js\"></script>" +
+                    "  <link href=\"http://codemirror.net/theme/dracula.css\" rel=\"stylesheet\">" +
                     "  <script src=\"http://codemirror.net/mode/clike/clike.js\"></script>" +
+                    "  <style>\n" +
+                    "    .CodeMirror {\n" +
+                    "      font-size: 22px;\n" +
+                    "      border-width: 0px;" +
+                    "      box-sizing: border-box;" +
+                    "      height: 650px;" +
+                    "      transform: translate(-10px, -10px);" +
+                    "      " +
+                    "    }\n" +
+                    "  </style>" +
                     "</head>" +
                     "<body>" +
                     "<form><textarea id=\"code\" name=\"code\">\n" +
@@ -38,7 +53,8 @@ public class CodeEditor extends StackPane {
                     "  var editor = CodeMirror.fromTextArea(document.getElementById(\"code\"), {" +
                     "    lineNumbers: true," +
                     "    matchBrackets: true," +
-                    "    mode: \"text/x-java\"" +
+                    "    theme: 'dracula'," +
+                    "    mode: \"text/x-kotlin\"" +
                     "  });" +
                     "</script>" +
                     "</body>" +

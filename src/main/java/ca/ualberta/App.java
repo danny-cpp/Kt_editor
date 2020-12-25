@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,11 +19,7 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static VBox layout;
-
     private static Scene scene;
-
-
 
     @Override
     public void init() throws Exception {
@@ -32,8 +29,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        layout = MainScene.createMainScene();
-        scene = new Scene(layout);
+        VBox layout = MainScene.createMainScene();
+        scene = new Scene(layout, 1400, 950);
+
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         stage.setTitle("Kotlin Editor");
 
         stage.setScene(scene);
