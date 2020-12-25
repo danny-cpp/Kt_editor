@@ -38,3 +38,9 @@
     <li>Check ignore warnings to suppress 
     <a href="https://stackoverflow.com/questions/56472732/kotlin-compiles-fine-but-keeps-warning-an-illegal-reflective-access-operation">Kotlin Reflection warnings</a></li>
 </ul>
+
+<h4>5. Acknowledgement</h4>
+<p>
+    Project implemented the open-source product of <a href="https://github.com/codemirror/codemirror">CodeMirror</a>,
+    which <a href="https://github.com/codemirror/CodeMirror/blob/master/LICENSE">licensed</a> under the MIT license. All rights reserved to the respective owners.
+</p>
