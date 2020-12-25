@@ -44,5 +44,11 @@
 <p>
     Project implemented the open-source product of <a href="https://github.com/codemirror/codemirror">CodeMirror</a>,
     which <a href="https://github.com/codemirror/CodeMirror/blob/master/LICENSE">licensed</a> under the MIT license. All rights reserved to the respective owners.<br><br>
-    Project is based on JavaFX 15 framework. All right reserved to the respective owners.
+    Project is based on <a href="https://openjfx.io/">JavaFX 15</a> framework. All right reserved to the respective owners.
 </p>
+<h4>6. Known Bugs</h4>
+<h5>V 1.0</h5>
+<ul>
+    <li>Unable to drag-select text in editor area (the text is still selectable)</li>
+    <li>Issue with long running task cause unresponsiveness</li>
+</ul>
