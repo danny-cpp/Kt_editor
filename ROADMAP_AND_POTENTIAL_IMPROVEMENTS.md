@@ -34,3 +34,10 @@
 </p>
 
 <h4>3. Difficulties during development</h4>
+<ul>
+    <li>JavaFX community is not robust and learning it is somewhat challenging</li>
+    <li>JavaFX FXML error when using custom elements (i.e. child elements of VBOX, HBOX,...). This forces me
+    to write the whole scene in one file, losing the MVC independence.</li>
+    <li>Thread concurrency is a major task and I need more time to fully understand. This is crucial to prevent unresponsive
+    while running very long tasks.</li>
+</ul>
