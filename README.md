@@ -50,5 +50,5 @@
 <h5>V 1.0</h5>
 <ul>
     <li>Unable to drag-select text in editor area (the text is still selectable)</li>
-    <li>Issue with long running task cause unresponsiveness</li>
+    <li>Issue with long running task cause unresponsiveness (Concurrency development is underway. Will be released in V1.1)</li>
 </ul>
