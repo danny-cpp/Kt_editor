@@ -2,6 +2,7 @@ package ca.ualberta.scenes;
 
 import ca.ualberta.execution.Execution;
 import ca.ualberta.formatting.CodeEditor;
+import ca.ualberta.scenes.actions.ActionLambda;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -78,45 +79,20 @@ public class MainScene {
         ignore_warning.getStyleClass().add("checkers");
         HBox.setMargin(ignore_warning, new Insets(5, 50, 0, 60));
 
-
-        win_check.setOnAction(x -> {
-            if (win_check.isSelected())
-                isWindow = true;
-            else
-                isWindow = false;
-        });
-
-        ignore_warning.setOnAction(x -> {
-            if (ignore_warning.isSelected())
-                noWarning = true;
-            else
-                noWarning = false;
-        });
-
-        HBox checkers = new HBox(win_check, ignore_warning);
-
         runButton = new Button("Execute");
         runButton.getStyleClass().add("run-button");
         VBox.setMargin(runButton, new Insets(8, 0, 0 ,50));
         runButton.setMinWidth(180);
 
-        runButton.setOnAction(x -> {
-            content = editor.getCodeAndSnapshot();
-            // System.out.println(content);
-            System.out.println("good");
+        HBox checkers = new HBox(win_check, ignore_warning);
 
-            // Write to file
-            Execution.writeToFile(content);
-            try {
-                BufferedReader reader = Execution.runKotlinScript(isWindow);
-                Execution.terminalResponse(reader, previewer, noWarning);
-            }
-            catch (IOException e) {
-                previewer.clear();
-                previewer.setText("ERROR OCCUR! \nPlease set \"Running on Windows\" option appropriately.");
-                e.printStackTrace();
-            }
-        });
+
+
+
+        win_check.setOnAction(x -> ActionLambda.winCheck(win_check, isWindow));
+        ignore_warning.setOnAction(x -> ActionLambda.ignoreWarning(ignore_warning, noWarning));
+        runButton.setOnAction(x -> ActionLambda.execute(editor, previewer, isWindow, noWarning));
+
 
         return new VBox(titleArea, wordBox, checkers, runButton);
     }
