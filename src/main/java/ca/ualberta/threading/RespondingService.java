@@ -1,5 +1,6 @@
 package ca.ualberta.threading;
 
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
@@ -21,26 +22,28 @@ public class RespondingService extends Service {
     @Override
     protected Task createTask() {
 
+        previewer.clear();
         String line = null;
         while (true) {
             try {
                 line = reader.readLine();
+                if (line == null)
+                    return null;
             } catch (Exception e) {
                 e.printStackTrace();
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
+                break;
             }
 
-            previewer.appendText(line + "\n");
+            String finalLine = line;
+            Platform.runLater(() -> previewer.appendText(finalLine + "\n"));
             try {
-                Thread.sleep(10);
+
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
+        return null;
     }
 }

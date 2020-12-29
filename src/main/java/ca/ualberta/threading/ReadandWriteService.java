@@ -38,13 +38,14 @@ public class ReadandWriteService extends Service {
                 // Write to file
                 Execution.writeToFile(content);
                 try {
-                    reader = Execution.runKotlinScript(true);
+                    reader = Execution.runKotlinScript(isWindow);
 
                 }
                 catch (IOException e) {
-                    // previewer.clear();
-                    // previewer.setText("ERROR OCCUR! \nPlease set \"Running on Windows\" option appropriately.");
+                    previewer.clear();
+                    previewer.setText("ERROR OCCUR! \nPlease set \"Running on Windows\" option appropriately.");
                     e.printStackTrace();
+                    throw new InterruptedException();
                 }
 
                 RespondingService rep = new RespondingService(reader, previewer);
@@ -59,5 +60,10 @@ public class ReadandWriteService extends Service {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setBoolean(boolean isWindow, boolean noWarning) {
+        this.isWindow = isWindow;
+        this.noWarning = noWarning;
     }
 }

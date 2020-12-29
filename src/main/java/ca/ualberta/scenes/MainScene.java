@@ -100,11 +100,13 @@ public class MainScene {
 
 
 
-        win_check.setOnAction(x -> ActionLambda.winCheck(win_check, isWindow));
-        ignore_warning.setOnAction(x -> ActionLambda.ignoreWarning(ignore_warning, noWarning));
+        win_check.setOnAction(x -> isWindow = ActionLambda.winCheck(win_check, isWindow));
+        ignore_warning.setOnAction(x -> noWarning = ActionLambda.ignoreWarning(ignore_warning, noWarning));
         runButton.setOnAction(x -> {
 
             rw.setContent(editor.getCodeAndSnapshot());
+            rw.setBoolean(isWindow, noWarning);
+
             rw.restart();
 
 
