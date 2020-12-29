@@ -1,7 +1,9 @@
 package ca.ualberta.threading;
 
+
 import ca.ualberta.execution.Execution;
 import ca.ualberta.formatting.CodeEditor;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -9,21 +11,19 @@ import javafx.scene.layout.HBox;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ConcurrentExecution extends Thread {
+public class ConcurrentExecution {
+    public static Task getTask(CodeEditor editor, TextArea previewer,
+                               boolean isWindow, boolean noWarning, HBox loading) {
 
-    public static Task getTask(CodeEditor editor, TextArea previewer, boolean isWindow,
-                               boolean noWarning, HBox loadingArea) {
-        Task res = new Task<BufferedReader>() {
+        Task <Void> task = new Task() {
             @Override
-            protected BufferedReader call() throws Exception {
-                System.out.println("thread called");
+            protected String call() throws Exception {
 
-                // String content = editor.getCodeAndSnapshot();
                 String content = "// Try me\n" +
                         "val str = \"HELLOWORLD!\"\n" +
                         "\n" +
                         "var tmp = \"\"\n" +
-                        "for (i in 0..10000) {\n" +
+                        "for (i in 0..5000000) {\n" +
                         "  println(i)\n" +
                         "}";
                 // System.out.println(content);
@@ -31,14 +31,13 @@ public class ConcurrentExecution extends Thread {
 
                 // Write to file
                 Execution.writeToFile(content);
-
-                BufferedReader reader = null;
                 try {
-                    reader = Execution.runKotlinScript(true);
-
-                    String line = null;
+                    BufferedReader reader = Execution.runKotlinScript(isWindow);
+                    String line;
                     while ((line = reader.readLine()) != null) {
                         System.out.println(line);
+                        String finalLine = line;
+
                     }
                 }
                 catch (IOException e) {
@@ -48,15 +47,14 @@ public class ConcurrentExecution extends Thread {
                 }
 
 
-                return reader;
+
+                return null;
             }
         };
 
-        return res;
-    }
-
-    public ConcurrentExecution(Task t) {
-        super(t);
-        setDaemon(true);
+        return task;
     }
 }
+
+    // public static void execute(CodeEditor editor, TextArea previewer,
+    //                            boolean isWindow, boolean noWarning, HBox loading) {

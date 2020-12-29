@@ -2,8 +2,7 @@ package ca.ualberta.scenes;
 
 import ca.ualberta.formatting.CodeEditor;
 import ca.ualberta.scenes.actions.ActionLambda;
-import ca.ualberta.threading.ConcurrentExecution;
-import javafx.concurrent.Task;
+import ca.ualberta.threading.ReadandWriteService;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -34,14 +33,15 @@ public class MainScene {
                                     "val str = \"HELLOWORLD!\"\n" +
                                     "\n" +
                                     "var tmp = \"\"\n" +
-                                    "for (i in 0..10000) {\n" +
+                                    "for (i in 0..1000000) {\n" +
                                     "  println(i)\n" +
                                     "}";
 
     private static boolean isWindow;
     private static boolean noWarning;
 
-    private static HBox loading;
+    private static HBox status;
+    private static ProgressIndicator loading;
 
     private static BufferedReader reader;
 
@@ -86,7 +86,12 @@ public class MainScene {
         VBox.setMargin(runButton, new Insets(8, 0, 0 ,50));
         runButton.setMinWidth(180);
 
-        loading = new HBox();
+
+        loading = new ProgressIndicator();
+        status = new HBox(loading);
+        ReadandWriteService rw = new ReadandWriteService(testStr, previewer, isWindow, noWarning, loading);
+        loading.visibleProperty().bind(rw.runningProperty());
+
 
         HBox checkers = new HBox(win_check, ignore_warning, loading);
 
@@ -96,11 +101,15 @@ public class MainScene {
         win_check.setOnAction(x -> ActionLambda.winCheck(win_check, isWindow));
         ignore_warning.setOnAction(x -> ActionLambda.ignoreWarning(ignore_warning, noWarning));
         runButton.setOnAction(x -> {
-            Task exe = ConcurrentExecution.getTask(editor, previewer, isWindow, noWarning, loading);
-            new ConcurrentExecution(exe).start();
+            rw.content = editor.getCodeAndSnapshot();
+
+            rw.restart();
+
         });
 
 
         return new VBox(titleArea, wordBox, checkers, runButton);
     }
 }
+
+// editor, previewer, isWindow, noWarning, loading
