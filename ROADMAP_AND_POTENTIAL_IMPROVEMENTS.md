@@ -34,10 +34,18 @@
 </p>
 
 <h4>3. Difficulties during development</h4>
+<h5>V 1.0 </h5>
 <ul>
     <li>JavaFX community is not robust and learning it is somewhat challenging</li>
     <li>JavaFX FXML error when using custom elements (i.e. child elements of VBOX, HBOX,...). This forces me
     to write the whole scene in one file, losing the MVC independence.</li>
     <li>Thread concurrency is a major task and I need more time to fully understand. This is crucial to prevent unresponsive
     while running very long tasks.</li>
+</ul>
+<h5>V 1.2 (Under development)</h5>
+<ul>
+    <li>Multithreading in GUI application is an obstacle that I need to overcome. This topic is not trivial and need some
+    time to master.</li>
+    <li>JavaFX Service is under researched for multithreading development</li>
+    
 </ul>

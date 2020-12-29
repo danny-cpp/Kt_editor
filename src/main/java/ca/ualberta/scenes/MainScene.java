@@ -1,25 +1,15 @@
 package ca.ualberta.scenes;
 
-import ca.ualberta.execution.Execution;
 import ca.ualberta.formatting.CodeEditor;
 import ca.ualberta.scenes.actions.ActionLambda;
+import ca.ualberta.threading.ConcurrentExecution;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Box;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 public class MainScene {
 
@@ -40,8 +30,20 @@ public class MainScene {
                                         "  tmp += \"   \"\n" +
                                         "}";
 
+    private static String testStr = "// Try me\n" +
+                                    "val str = \"HELLOWORLD!\"\n" +
+                                    "\n" +
+                                    "var tmp = \"\"\n" +
+                                    "for (i in 0..10000) {\n" +
+                                    "  println(i)\n" +
+                                    "}";
+
     private static boolean isWindow;
     private static boolean noWarning;
+
+    private static HBox loading;
+
+    private static BufferedReader reader;
 
     public static VBox createMainScene() {
 
@@ -51,7 +53,7 @@ public class MainScene {
         titleArea = new HBox(title);
         titleArea.setId("titleArea");
 
-        editor = new CodeEditor(defaultString);
+        editor = new CodeEditor(testStr);
         editor.setId("editor");
         editor.getStyleClass().add("word-box");
 
@@ -84,14 +86,19 @@ public class MainScene {
         VBox.setMargin(runButton, new Insets(8, 0, 0 ,50));
         runButton.setMinWidth(180);
 
-        HBox checkers = new HBox(win_check, ignore_warning);
+        loading = new HBox();
+
+        HBox checkers = new HBox(win_check, ignore_warning, loading);
 
 
 
 
         win_check.setOnAction(x -> ActionLambda.winCheck(win_check, isWindow));
         ignore_warning.setOnAction(x -> ActionLambda.ignoreWarning(ignore_warning, noWarning));
-        runButton.setOnAction(x -> ActionLambda.execute(editor, previewer, isWindow, noWarning));
+        runButton.setOnAction(x -> {
+            Task exe = ConcurrentExecution.getTask(editor, previewer, isWindow, noWarning, loading);
+            new ConcurrentExecution(exe).start();
+        });
 
 
         return new VBox(titleArea, wordBox, checkers, runButton);
