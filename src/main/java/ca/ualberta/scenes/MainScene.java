@@ -3,12 +3,14 @@ package ca.ualberta.scenes;
 import ca.ualberta.formatting.CodeEditor;
 import ca.ualberta.scenes.actions.ActionLambda;
 import ca.ualberta.threading.ReadandWriteService;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 public class MainScene {
 
@@ -101,9 +103,10 @@ public class MainScene {
         win_check.setOnAction(x -> ActionLambda.winCheck(win_check, isWindow));
         ignore_warning.setOnAction(x -> ActionLambda.ignoreWarning(ignore_warning, noWarning));
         runButton.setOnAction(x -> {
-            rw.content = editor.getCodeAndSnapshot();
 
+            rw.setContent(editor.getCodeAndSnapshot());
             rw.restart();
+
 
         });
 

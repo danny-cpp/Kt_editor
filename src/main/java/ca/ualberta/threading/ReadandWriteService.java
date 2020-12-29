@@ -2,6 +2,7 @@ package ca.ualberta.threading;
 
 import ca.ualberta.execution.Execution;
 import ca.ualberta.formatting.CodeEditor;
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.ProgressIndicator;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class ReadandWriteService extends Service {
 
 
-    public String content;
+    private String content;
     private TextArea previewer;
     private boolean isWindow;
     private boolean noWarning;
@@ -31,18 +32,14 @@ public class ReadandWriteService extends Service {
     protected Task createTask() {
         return new Task() {
             @Override
-            protected BufferedReader call() throws Exception {
+            protected Void call() throws Exception {
                 BufferedReader reader = null;
 
                 // Write to file
                 Execution.writeToFile(content);
                 try {
                     reader = Execution.runKotlinScript(true);
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        System.out.println(line);
 
-                    }
                 }
                 catch (IOException e) {
                     // previewer.clear();
@@ -50,9 +47,17 @@ public class ReadandWriteService extends Service {
                     e.printStackTrace();
                 }
 
-                return reader;
+                RespondingService rep = new RespondingService(reader, previewer);
+                rep.restart();
+
+
+                return null;
             }
         };
 
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
