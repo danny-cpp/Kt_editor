@@ -51,7 +51,10 @@ public class ReadandWriteService extends Service {
                 }
                 catch (IOException e) {
                     previewer.clear();
-                    previewer.setText("ERROR OCCUR! \nPlease set \"Running on Windows\" option appropriately.");
+                    previewer.setText("ERROR OCCUR! \nPlease set \"Running on Windows\" option appropriately." +
+                            "\n\nProcess finished with exit code 10");
+                    runButton.setDisable(false);
+                    breakButton.setVisible(false);
                     e.printStackTrace();
                     throw new InterruptedException();
                 }

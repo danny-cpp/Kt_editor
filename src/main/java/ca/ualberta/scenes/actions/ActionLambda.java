@@ -17,7 +17,6 @@ public class ActionLambda {
         if (win_check.isSelected())
             return true;
         else
-            System.out.println("changed");
             return false;
     }
 

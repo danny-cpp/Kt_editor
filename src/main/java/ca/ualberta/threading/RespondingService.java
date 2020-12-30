@@ -61,8 +61,8 @@ public class RespondingService extends Service {
             String finalLine = line;
             Platform.runLater(() -> previewer.appendText(finalLine + "\n"));
             try {
-
                 Thread.sleep(1);
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
