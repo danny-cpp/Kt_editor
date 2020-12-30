@@ -1,7 +1,9 @@
 ca\ualberta\formatting\CodeEditor.class
+ca\ualberta\threading\ReadandWriteService.class
 ca\ualberta\App.class
+ca\ualberta\threading\RespondingService.class
 module-info.class
-ca\ualberta\formatting\EditorFormat.class
 ca\ualberta\scenes\MainScene.class
-ca\ualberta\PrimaryController.class
+ca\ualberta\scenes\actions\ActionLambda.class
+ca\ualberta\threading\ReadandWriteService$1.class
 ca\ualberta\execution\Execution.class
