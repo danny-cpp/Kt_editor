@@ -17,20 +17,20 @@ public class RespondingService extends Service {
     private boolean noWarning;
     private Button runButton;
     private Button breakButton;
+    private boolean isCanceled;
 
     public RespondingService(BufferedReader reader, TextArea previewer, boolean noWarning,
-                             Button runButton, Button breakButton) {
+                             Button runButton, Button breakButton, boolean isCanceled) {
         this.reader = reader;
         this.previewer = previewer;
         this.noWarning = noWarning;
         this.runButton = runButton;
         this.breakButton = breakButton;
+        this.isCanceled = isCanceled;
     }
 
     @Override
     protected Task createTask() {
-
-
 
         previewer.clear();
         String line = null;
@@ -45,7 +45,7 @@ public class RespondingService extends Service {
             }
         }
 
-        while (true) {
+        while (!isCanceled) {
             try {
                 line = reader.readLine();
                 if (line == null) {
@@ -55,7 +55,7 @@ public class RespondingService extends Service {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                break;
+                return null;
             }
 
             String finalLine = line;
@@ -65,6 +65,16 @@ public class RespondingService extends Service {
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                runButton.setDisable(false);
+                breakButton.setVisible(false);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+                previewer.clear();
+                previewer.setText("\n\nProcess finished with exit code -1");
+                return null;
             }
         }
 

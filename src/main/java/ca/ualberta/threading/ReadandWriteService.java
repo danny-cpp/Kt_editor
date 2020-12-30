@@ -1,6 +1,7 @@
 package ca.ualberta.threading;
 
 import ca.ualberta.execution.Execution;
+import ca.ualberta.scenes.actions.ActionLambda;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Button;
@@ -20,6 +21,8 @@ public class ReadandWriteService extends Service {
     private ProgressIndicator loading;
     private Button runButton;
     private Button breakButton;
+    private boolean isCanceled;
+    private RespondingService rep;
 
     public ReadandWriteService(String content, TextArea previewer,
                                boolean isWindow, boolean noWarning, ProgressIndicator loading,
@@ -47,7 +50,6 @@ public class ReadandWriteService extends Service {
                 Execution.writeToFile(content);
                 try {
                     reader = Execution.runKotlinScript(isWindow);
-
                 }
                 catch (IOException e) {
                     previewer.clear();
@@ -59,7 +61,8 @@ public class ReadandWriteService extends Service {
                     throw new InterruptedException();
                 }
 
-                RespondingService rep = new RespondingService(reader, previewer, noWarning, runButton, breakButton);
+                rep = new RespondingService(reader, previewer, noWarning, runButton,
+                        breakButton, isCanceled);
                 rep.restart();
 
                 return null;
@@ -75,5 +78,9 @@ public class ReadandWriteService extends Service {
     public void setBoolean(boolean isWindow, boolean noWarning) {
         this.isWindow = isWindow;
         this.noWarning = noWarning;
+    }
+
+    public void cancelSubThread() {
+        rep.cancel();
     }
 }

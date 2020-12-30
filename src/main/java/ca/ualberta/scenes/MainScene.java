@@ -103,8 +103,11 @@ public class MainScene {
         HBox checkers = new HBox(win_check, ignore_warning, loading);
 
 
-
-
+        breakButton.setOnAction(x -> {
+            System.out.println("canceling");
+            rw.cancelSubThread();
+            rw.cancel();
+        });
         win_check.setOnAction(x -> isWindow = ActionLambda.winCheck(win_check, isWindow));
         ignore_warning.setOnAction(x -> noWarning = ActionLambda.ignoreWarning(ignore_warning, noWarning));
         runButton.setOnAction(x -> {
