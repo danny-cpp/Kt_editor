@@ -1,25 +1,12 @@
 package ca.ualberta.scenes;
 
-import ca.ualberta.execution.Execution;
 import ca.ualberta.formatting.CodeEditor;
 import ca.ualberta.scenes.actions.ActionLambda;
+import ca.ualberta.threading.ReadandWriteService;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Box;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 
 public class MainScene {
 
@@ -27,8 +14,7 @@ public class MainScene {
     private static CodeEditor editor;
     private static TextArea previewer;
     private static Button runButton;
-
-    private static String content;
+    private static Button breakButton;
 
     private static String defaultString =
                                         "// Try me\n" +
@@ -40,8 +26,19 @@ public class MainScene {
                                         "  tmp += \"   \"\n" +
                                         "}";
 
+    private static String testStr = "// Try me\n" +
+                                    "val str = \"HELLOWORLD!\"\n" +
+                                    "\n" +
+                                    "var tmp = \"\"\n" +
+                                    "for (i in 0..5000) {\n" +
+                                    "  println(i)\n" +
+                                    "}";
+
     private static boolean isWindow;
     private static boolean noWarning;
+
+    private static HBox status;
+    private static ProgressIndicator loading;
 
     public static VBox createMainScene() {
 
@@ -51,7 +48,7 @@ public class MainScene {
         titleArea = new HBox(title);
         titleArea.setId("titleArea");
 
-        editor = new CodeEditor(defaultString);
+        editor = new CodeEditor(testStr);
         editor.setId("editor");
         editor.getStyleClass().add("word-box");
 
@@ -81,19 +78,47 @@ public class MainScene {
 
         runButton = new Button("Execute");
         runButton.getStyleClass().add("run-button");
-        VBox.setMargin(runButton, new Insets(8, 0, 0 ,50));
         runButton.setMinWidth(180);
 
-        HBox checkers = new HBox(win_check, ignore_warning);
+        breakButton = new Button("Break");
+        breakButton.getStyleClass().add("break-button");
+        HBox.setMargin(breakButton, new Insets(5, 0, 0 ,30));
+        breakButton.setMinWidth(180);
+        breakButton.setVisible(false);
+
+        HBox buttonArea = new HBox(runButton, breakButton);
+        HBox.setMargin(runButton, new Insets(5, 0, 0 ,50));
+
+        loading = new ProgressIndicator();
+        loading.setMaxWidth(40);
+
+        HBox.setMargin(loading, new Insets(-10, 0, 0, 90));
+        status = new HBox(loading);
+
+        ReadandWriteService rw = new ReadandWriteService(testStr, previewer, isWindow, noWarning, loading,
+                                                         runButton, breakButton);
+        loading.visibleProperty().bind(rw.runningProperty());
 
 
+        HBox checkers = new HBox(win_check, ignore_warning, loading);
 
 
-        win_check.setOnAction(x -> ActionLambda.winCheck(win_check, isWindow));
-        ignore_warning.setOnAction(x -> ActionLambda.ignoreWarning(ignore_warning, noWarning));
-        runButton.setOnAction(x -> ActionLambda.execute(editor, previewer, isWindow, noWarning));
+        breakButton.setOnAction(x -> {
+            System.out.println("canceling");
+            rw.cancelSubThread();
+            rw.cancel();
+        });
+        win_check.setOnAction(x -> isWindow = ActionLambda.winCheck(win_check, isWindow));
+        ignore_warning.setOnAction(x -> noWarning = ActionLambda.ignoreWarning(ignore_warning, noWarning));
+        runButton.setOnAction(x -> {
+
+            rw.setContent(editor.getCodeAndSnapshot());
+            rw.setBoolean(isWindow, noWarning);
+            rw.restart();
+
+        });
 
 
-        return new VBox(titleArea, wordBox, checkers, runButton);
+        return new VBox(titleArea, wordBox, checkers, buttonArea);
     }
 }

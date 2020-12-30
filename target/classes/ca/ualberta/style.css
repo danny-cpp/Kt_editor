@@ -68,3 +68,27 @@
     -fx-scale-x: 0.9;
     -fx-scale-y: 0.85;
 }
+
+.run-button:disabled {
+
+}
+
+.break-button {
+    -fx-border-radius: 50;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #CC0000, #8E0000);
+    -fx-background-radius: 60;
+    -fx-text-fill: #f0f0f0;
+    -fx-font-size: 24;
+}
+
+.break-button:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.2;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #CC0000, #8E0000);
+    -fx-font-size: 22;
+}
+
+.break-button:pressed {
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.85;
+}
