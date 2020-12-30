@@ -53,7 +53,9 @@
     <li>Issue with long running task cause unresponsiveness (Concurrency development is underway. Will be released in V1.1)</li>
 </ul>
 <h5>V 1.1 </h5>
+<ul>
     <li>Concurrency supported. IDE can execute long-running code without halt. GUI still responsive.</li>
     <li>Can edit code while script is still running.</li>
     <li>Added execute-break toggle switches. Break can interrupt code execution.</li>
     <li>Live-response terminal display.</li>
+</ul>
