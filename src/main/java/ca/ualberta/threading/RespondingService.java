@@ -72,8 +72,7 @@ public class RespondingService extends Service {
                 } catch (InterruptedException interruptedException) {
                     interruptedException.printStackTrace();
                 }
-                previewer.clear();
-                previewer.setText("\n\nProcess finished with exit code -1");
+                previewer.appendText("\nInterrupted\nProcess finished with exit code -1\n\n");
                 return null;
             }
         }
