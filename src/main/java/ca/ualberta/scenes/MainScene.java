@@ -3,14 +3,10 @@ package ca.ualberta.scenes;
 import ca.ualberta.formatting.CodeEditor;
 import ca.ualberta.scenes.actions.ActionLambda;
 import ca.ualberta.threading.ReadandWriteService;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 
 public class MainScene {
 
@@ -18,8 +14,7 @@ public class MainScene {
     private static CodeEditor editor;
     private static TextArea previewer;
     private static Button runButton;
-
-    private static String content;
+    private static Button breakButton;
 
     private static String defaultString =
                                         "// Try me\n" +
@@ -35,7 +30,7 @@ public class MainScene {
                                     "val str = \"HELLOWORLD!\"\n" +
                                     "\n" +
                                     "var tmp = \"\"\n" +
-                                    "for (i in 0..1000000) {\n" +
+                                    "for (i in 0..5000) {\n" +
                                     "  println(i)\n" +
                                     "}";
 
@@ -44,8 +39,6 @@ public class MainScene {
 
     private static HBox status;
     private static ProgressIndicator loading;
-
-    private static BufferedReader reader;
 
     public static VBox createMainScene() {
 
@@ -85,13 +78,25 @@ public class MainScene {
 
         runButton = new Button("Execute");
         runButton.getStyleClass().add("run-button");
-        VBox.setMargin(runButton, new Insets(8, 0, 0 ,50));
         runButton.setMinWidth(180);
 
+        breakButton = new Button("Break");
+        breakButton.getStyleClass().add("break-button");
+        HBox.setMargin(breakButton, new Insets(5, 0, 0 ,30));
+        breakButton.setMinWidth(180);
+        breakButton.setVisible(false);
+
+        HBox buttonArea = new HBox(runButton, breakButton);
+        HBox.setMargin(runButton, new Insets(5, 0, 0 ,50));
 
         loading = new ProgressIndicator();
+        loading.setMaxWidth(40);
+
+        HBox.setMargin(loading, new Insets(-10, 0, 0, 90));
         status = new HBox(loading);
-        ReadandWriteService rw = new ReadandWriteService(testStr, previewer, isWindow, noWarning, loading);
+
+        ReadandWriteService rw = new ReadandWriteService(testStr, previewer, isWindow, noWarning, loading,
+                                                         runButton, breakButton);
         loading.visibleProperty().bind(rw.runningProperty());
 
 
@@ -106,15 +111,11 @@ public class MainScene {
 
             rw.setContent(editor.getCodeAndSnapshot());
             rw.setBoolean(isWindow, noWarning);
-
             rw.restart();
-
 
         });
 
 
-        return new VBox(titleArea, wordBox, checkers, runButton);
+        return new VBox(titleArea, wordBox, checkers, buttonArea);
     }
 }
-
-// editor, previewer, isWindow, noWarning, loading

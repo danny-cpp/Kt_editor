@@ -1,10 +1,9 @@
 package ca.ualberta.threading;
 
 import ca.ualberta.execution.Execution;
-import ca.ualberta.formatting.CodeEditor;
-import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 
@@ -19,13 +18,19 @@ public class ReadandWriteService extends Service {
     private boolean isWindow;
     private boolean noWarning;
     private ProgressIndicator loading;
+    private Button runButton;
+    private Button breakButton;
 
-    public ReadandWriteService(String content, TextArea previewer, boolean isWindow, boolean noWarning, ProgressIndicator loading) {
+    public ReadandWriteService(String content, TextArea previewer,
+                               boolean isWindow, boolean noWarning, ProgressIndicator loading,
+                               Button runButton, Button breakButton) {
         this.content = content;
         this.previewer = previewer;
         this.isWindow = isWindow;
         this.noWarning = noWarning;
         this.loading = loading;
+        this.runButton = runButton;
+        this.breakButton = breakButton;
     }
 
     @Override
@@ -33,6 +38,9 @@ public class ReadandWriteService extends Service {
         return new Task() {
             @Override
             protected Void call() throws Exception {
+                runButton.setDisable(true);
+                breakButton.setVisible(true);
+
                 BufferedReader reader = null;
 
                 // Write to file
@@ -48,9 +56,8 @@ public class ReadandWriteService extends Service {
                     throw new InterruptedException();
                 }
 
-                RespondingService rep = new RespondingService(reader, previewer);
+                RespondingService rep = new RespondingService(reader, previewer, noWarning, runButton, breakButton);
                 rep.restart();
-
 
                 return null;
             }

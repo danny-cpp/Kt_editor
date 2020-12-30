@@ -2,6 +2,6 @@
 val str = "HELLOWORLD!"
 
 var tmp = ""
-for (i in 0..10000) {
+for (i in 0..5000) {
   println(i)
 }
