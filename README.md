@@ -58,5 +58,5 @@
     <li>Can edit code while script is still running.</li>
     <li>Added execute-break toggle switches. Break can interrupt code execution.</li>
     <li>Live-response terminal display.</li>
-    <li>Exit code added</li>
+    <li>Exit code added (Only other than code 0)</li>
 </ul>
